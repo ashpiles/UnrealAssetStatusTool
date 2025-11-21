@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Asset Status Icons",
+	"Description": "Provides extra support and functionality to Asset Tags",
+	"Category": "Other",
+	"CreatedBy": "Mia Sedgewick",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "AssetTagsPlus",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		}
+	]
+}
