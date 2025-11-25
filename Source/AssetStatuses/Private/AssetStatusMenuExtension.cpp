@@ -5,10 +5,9 @@
 
 #include "AssetSelection.h"
 #include "AssetStatusIconSettings.h"
-#include "AssetStatusStyle.h"
 #include "EditorAssetLibrary.h"
 
-
+#define LOCTEXT_NAMESPACE "AssetStatusMenuExtension"
 FAssetStatusMenuExtension::FAssetStatusMenuExtension(UAssetStatusIconSettings* Settings)
 {
 	check(Settings);
@@ -49,6 +48,7 @@ void FAssetStatusMenuExtension::AddAssetStatusMenu(FMenuBuilder& MenuBuilder)
 // once we get functionality can focus on adding menu separators and menu icons
 void FAssetStatusMenuExtension::FillAssetStatusSubMenus(FMenuBuilder& MenuBuilder)
 {
+	MenuBuilder.BeginSection("AssetStatuses", LOCTEXT("AssetStatusTags", "Asset Status Tags"));
 	for (auto Entry : AssetStatusSettings->AssetStatusEntries) 
 	{
 		// Create new menu entry of Asset Status Tag Value
@@ -68,6 +68,45 @@ void FAssetStatusMenuExtension::FillAssetStatusSubMenus(FMenuBuilder& MenuBuilde
 			}
 			))
 		);
-	} 
+	}
+	MenuBuilder.EndSection();
+	MenuBuilder.AddMenuSeparator();
+	// Remove Asset Status - Remove metadata
+	MenuBuilder.AddMenuEntry(
+	FText::FromString("Remove Asset Status"),
+	FText::FromString("Completely remove Asset Status metadata"),
+	FSlateIcon(),
+	FUIAction(
+		FExecuteAction::CreateLambda([]()
+		{
+			// For each selected asset apply the cached asset status
+			TArray<FAssetData> SelectedAssets;
+			AssetSelectionUtils::GetSelectedAssets(SelectedAssets);
+				
+			for (const auto& Asset : SelectedAssets)
+				UEditorAssetLibrary::RemoveMetadataTag(Asset.GetAsset(), "AssetStatus");
+		}
+		))
+	);
+
+	// Remove Asset Status - Keep metadat
+	MenuBuilder.AddMenuEntry(
+	FText::FromString("Clear Asset Status"),
+	FText::FromString("Completely remove Asset Status metadata"),
+	FSlateIcon(),
+	FUIAction(
+		FExecuteAction::CreateLambda([]()
+		{
+			// For each selected asset apply the cached asset status
+			TArray<FAssetData> SelectedAssets;
+			AssetSelectionUtils::GetSelectedAssets(SelectedAssets);
+				
+			for (const auto& Asset : SelectedAssets)
+				UEditorAssetLibrary::SetMetadataTag(Asset.GetAsset(), "AssetStatus", "None");
+		}
+		))
+	);
+	
 }
 
+#undef  LOCTEXT_NAMESPACE
