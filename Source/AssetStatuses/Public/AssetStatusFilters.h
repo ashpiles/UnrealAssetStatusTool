@@ -40,7 +40,7 @@ private:
 /**
  * 
  */
-class ASSETTAGSPLUS_API FAssetStatusFilters : public TSharedFromThis<FAssetStatusFilters>
+class ASSETSTATUSES_API FAssetStatusFilters : public TSharedFromThis<FAssetStatusFilters>
 {
 public:
 	explicit FAssetStatusFilters(UAssetStatusIconSettings* Settings);

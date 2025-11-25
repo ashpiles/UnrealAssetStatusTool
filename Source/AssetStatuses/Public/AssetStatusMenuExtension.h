@@ -8,7 +8,7 @@ class UAssetStatusIconSettings;
 /**
  * 
  */
-class ASSETTAGSPLUS_API FAssetStatusMenuExtension : public TSharedFromThis<FAssetStatusMenuExtension>
+class ASSETSTATUSES_API FAssetStatusMenuExtension : public TSharedFromThis<FAssetStatusMenuExtension>
 {
 public:
 	FAssetStatusMenuExtension(UAssetStatusIconSettings* Settings);

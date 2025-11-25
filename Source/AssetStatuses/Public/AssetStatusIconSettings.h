@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DeveloperSettings.h"
+#include "Interfaces/IPluginManager.h"
 #include "AssetStatusIconSettings.generated.h"
 
 
@@ -22,11 +23,12 @@ struct FAssetStatusEntry
 	FLinearColor FilterColor; 
 };
 
+
 /**
  * 
  */
 UCLASS(Config = Editor, defaultconfig, meta = (DisplayName = "Asset Status Icons", ToolTip = "Custom menu configuration for asset status icons"))
-class ASSETTAGSPLUS_API UAssetStatusIconSettings : public UDeveloperSettings
+class ASSETSTATUSES_API UAssetStatusIconSettings : public UDeveloperSettings
 {
 	GENERATED_BODY()
 
@@ -35,10 +37,10 @@ public:
 	UAssetStatusIconSettings();
 	
 	UPROPERTY(Config, EditDefaultsOnly, BlueprintReadOnly, Category="Tool Data")
-	FDirectoryPath IconFolderPath;
+	FDirectoryPath IconFolderPath = FDirectoryPath(IPluginManager::Get().FindPlugin(UE_PLUGIN_NAME)->GetBaseDir() + "/Resources/Icons");
  
 	UPROPERTY(Config, EditDefaultsOnly, BlueprintReadOnly, Category="Tool Data")
-	TArray<FAssetStatusEntry> AssetStatusEntries;
+	TArray<FAssetStatusEntry> AssetStatusEntries; 
 
 	UFUNCTION() 
 	TArray<FString> GetAvailableIcons();
@@ -46,6 +48,7 @@ public:
 	UFUNCTION()
 	FFilePath GetAssetStatusIconPath(FString& LocalFileName);
 	
-
+	virtual void PostInitProperties() override;
+ 
 };
  

@@ -4,7 +4,6 @@
 #include "AssetStatusStyle.h"
 
 #include "AssetStatusIconSettings.h"
-#include "PluginUtils.h"
 #include "Interfaces/IPluginManager.h"
 #include "Styling/SlateStyleRegistry.h"
 
@@ -83,7 +82,8 @@ void FAssetStatusEditorStyle::OnAssetStatusSettingsChanged(UObject* InObject, FP
 		UpdateIconStyles(Settings->AssetStatusEntries);
 		Register();
 	}
-	if (PropertyChangedEvent.GetPropertyName() == GET_MEMBER_NAME_CHECKED(FAssetStatusEntry, AssetStatusIcon))
+	if (PropertyChangedEvent.GetPropertyName() == GET_MEMBER_NAME_CHECKED(FAssetStatusEntry, AssetStatusIcon)
+		|| PropertyChangedEvent.GetPropertyName() == GET_MEMBER_NAME_CHECKED(FAssetStatusEntry, AssetStatusTagValue))
 	{
 		UnRegister(); 
 		UpdateIconStyles(Settings->AssetStatusEntries);

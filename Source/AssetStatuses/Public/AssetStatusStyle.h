@@ -3,14 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "EditorStyleSet.h"
 
 struct FAssetStatusEntry;
 class UAssetStatusIconSettings;
 /**
  * 
  */
-class ASSETTAGSPLUS_API FAssetStatusEditorStyle : public FSlateStyleSet
+class ASSETSTATUSES_API FAssetStatusEditorStyle : public FSlateStyleSet
 {
 public:
 	static void Register();

@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class AssetTagsPlus : ModuleRules
+public class AssetStatuses : ModuleRules
 {
-	public AssetTagsPlus(ReadOnlyTargetRules Target) : base(Target)
+	public AssetStatuses(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		
@@ -24,7 +24,7 @@ public class AssetTagsPlus : ModuleRules
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
-				"Core"
+				"Core", "Projects"
 			}
 			);
 			

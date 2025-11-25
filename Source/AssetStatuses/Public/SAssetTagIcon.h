@@ -10,7 +10,7 @@ class SAssetTagIcon;
 /**
  * Responsible for switching out the actual widget icon
  */
-class ASSETTAGSPLUS_API SAssetTagIcon : public SCompoundWidget
+class ASSETSTATUSES_API  SAssetTagIcon : public SCompoundWidget
 {
 	SLATE_BEGIN_ARGS(SAssetTagIcon) {}
 		SLATE_ATTRIBUTE(FString, AssetStatus)
