@@ -54,7 +54,7 @@ void FAssetStatusMenuExtension::FillAssetStatusSubMenus(FMenuBuilder& MenuBuilde
 		// Create new menu entry of Asset Status Tag Value
 		MenuBuilder.AddMenuEntry(
 		FText::FromString(Entry.AssetStatusTagValue),
-		FText::FromString("Change this Asset's status to " + Entry.AssetStatusTagValue),
+		FText::FromString("Change this asset's status to " + Entry.AssetStatusTagValue),
 		FSlateIcon(),
 		FUIAction(
 			FExecuteAction::CreateLambda([Entry]()
@@ -74,7 +74,7 @@ void FAssetStatusMenuExtension::FillAssetStatusSubMenus(FMenuBuilder& MenuBuilde
 	// Remove Asset Status - Remove metadata
 	MenuBuilder.AddMenuEntry(
 	FText::FromString("Remove Asset Status"),
-	FText::FromString("Completely remove Asset Status metadata"),
+	FText::FromString("Completely remove AssetStatus metadata"),
 	FSlateIcon(),
 	FUIAction(
 		FExecuteAction::CreateLambda([]()
@@ -87,25 +87,7 @@ void FAssetStatusMenuExtension::FillAssetStatusSubMenus(FMenuBuilder& MenuBuilde
 				UEditorAssetLibrary::RemoveMetadataTag(Asset.GetAsset(), "AssetStatus");
 		}
 		))
-	);
-
-	// Remove Asset Status - Keep metadat
-	MenuBuilder.AddMenuEntry(
-	FText::FromString("Clear Asset Status"),
-	FText::FromString("Completely remove Asset Status metadata"),
-	FSlateIcon(),
-	FUIAction(
-		FExecuteAction::CreateLambda([]()
-		{
-			// For each selected asset apply the cached asset status
-			TArray<FAssetData> SelectedAssets;
-			AssetSelectionUtils::GetSelectedAssets(SelectedAssets);
-				
-			for (const auto& Asset : SelectedAssets)
-				UEditorAssetLibrary::SetMetadataTag(Asset.GetAsset(), "AssetStatus", "None");
-		}
-		))
-	);
+	); 
 	
 }
 
