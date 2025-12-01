@@ -3,7 +3,7 @@
 
 #include "AssetStatusFilters.h"
 
-#include "AssetStatusIconSettings.h"
+#include "AssetStatusSettings.h"
 #include "AssetToolsModule.h"
 #include "ContentBrowserModule.h"
 #include "FileHelpers.h"
@@ -11,7 +11,7 @@
 #include "Filters/CustomTextFilters.h"
 
 
-FAssetStatusFilters::FAssetStatusFilters(UAssetStatusIconSettings* Settings)
+FAssetStatusFilters::FAssetStatusFilters(UAssetStatusSettings* Settings)
 {
 	AssetStatusSettings = Settings;
 	check(AssetStatusSettings) 
@@ -29,7 +29,7 @@ void FAssetStatusFilters::InitalizeFilters()
 
 void FAssetStatusFilters::OnAssetStatusChanged(UObject* InObject, FPropertyChangedEvent& PropertyChangedEvent)
 {
-	if (PropertyChangedEvent.GetMemberPropertyName() == GET_MEMBER_NAME_CHECKED(UAssetStatusIconSettings, AssetStatusEntries))
+	if (PropertyChangedEvent.GetMemberPropertyName() == GET_MEMBER_NAME_CHECKED(UAssetStatusSettings, AssetStatusEntries))
 	{
 		if (PropertyChangedEvent.ChangeType == EPropertyChangeType::ArrayAdd)
 			return;

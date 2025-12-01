@@ -6,7 +6,7 @@
 class FAssetStatusFilters;
 class FContentBrowserModule;
 struct FAssetStatusEntry;
-class UAssetStatusIconSettings;
+class UAssetStatusSettings;
 struct FCustomTextFilterData;
 
 
@@ -43,7 +43,7 @@ private:
 class ASSETSTATUSES_API FAssetStatusFilters : public TSharedFromThis<FAssetStatusFilters>
 {
 public:
-	explicit FAssetStatusFilters(UAssetStatusIconSettings* Settings);
+	explicit FAssetStatusFilters(UAssetStatusSettings* Settings);
 	~FAssetStatusFilters();
 	
 	void InitalizeFilters();
@@ -54,6 +54,6 @@ public:
 
 private:
 	TWeakObjectPtr<UStatusFilterLabelStorage> FilterLabels;
-	UAssetStatusIconSettings* AssetStatusSettings;
+	UAssetStatusSettings* AssetStatusSettings;
 
 };

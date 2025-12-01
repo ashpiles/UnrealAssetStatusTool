@@ -4,14 +4,14 @@
 
 #include "CoreMinimal.h"
 
-class UAssetStatusIconSettings;
+class UAssetStatusSettings;
 /**
  * 
  */
 class ASSETSTATUSES_API FAssetStatusMenuExtension : public TSharedFromThis<FAssetStatusMenuExtension>
 {
 public:
-	FAssetStatusMenuExtension(UAssetStatusIconSettings* Settings);
+	FAssetStatusMenuExtension(UAssetStatusSettings* Settings);
 	~FAssetStatusMenuExtension();
 	
 	TSharedRef<FExtender> StatusMenuExtensionDelegate(const TArray<FAssetData>& Assets);
@@ -20,6 +20,6 @@ private:
 	void FillAssetStatusSubMenus(FMenuBuilder& MenuBuilder);
 	void AddAssetStatusMenu(FMenuBuilder& MenuBuilder); 
 	
-	UAssetStatusIconSettings* AssetStatusSettings;
+	UAssetStatusSettings* AssetStatusSettings;
 
 };

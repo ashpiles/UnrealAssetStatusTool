@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 
 struct FAssetStatusEntry;
-class UAssetStatusIconSettings;
+class UAssetStatusSettings;
 /**
  * 
  */
@@ -17,7 +17,7 @@ public:
 
 	static const FAssetStatusEditorStyle& Get();
 
-	static void Initialize(UAssetStatusIconSettings* Settings);
+	static void Initialize(UAssetStatusSettings* Settings);
 
  
 private:

@@ -1,12 +1,14 @@
-#include "AssetStatusIconSettings.h"
-  
-UAssetStatusIconSettings::UAssetStatusIconSettings()
+#include "AssetStatusSettings.h"
+
+#include "AssetRegistry/AssetRegistryModule.h"
+
+UAssetStatusSettings::UAssetStatusSettings()
 { 
 }
 
 
 
-TArray<FString> UAssetStatusIconSettings::GetAvailableIcons()
+TArray<FString> UAssetStatusSettings::GetAvailableIcons()
 {
 	TArray<FString> AvailableIcons;
 	FString Folder = IconFolderPath.Path;
@@ -30,7 +32,16 @@ TArray<FString> UAssetStatusIconSettings::GetAvailableIcons()
 	return AvailableIcons;
 }
 
-FFilePath UAssetStatusIconSettings::GetAssetStatusIconPath(FString& LocalFileName)
+TArray<FName> UAssetStatusSettings::GetAvailableIconNames()
+{
+	TArray<FString> AvailableIcons = GetAvailableIcons();
+	TArray<FName> AvailableIconNames;
+	for (const FString& IconName : AvailableIcons)
+		AvailableIconNames.Add(*IconName);
+	return AvailableIconNames;
+}
+
+FFilePath UAssetStatusSettings::GetAssetStatusIconPath(FString& LocalFileName)
 {
 	FString Path = IconFolderPath.Path;
 	FString AbsolutePath = FPaths::ConvertRelativePathToFull(Path);
@@ -43,7 +54,18 @@ FFilePath UAssetStatusIconSettings::GetAssetStatusIconPath(FString& LocalFileNam
 	return FFilePath();
 }
 
-void UAssetStatusIconSettings::PostInitProperties()
+void UAssetStatusSettings::GetAssetDataOf(TArray<FName> StatusValues, TArray<FAssetData>& OutData) 
+{
+	FAssetRegistryModule& AssetRegistryModule = FModuleManager::LoadModuleChecked<FAssetRegistryModule>("AssetRegistry");
+	AssetRegistryModule.Get().GetAssetsByTags(StatusValues, OutData);
+}
+
+UAssetStatusSettings* UAssetStatusSettings::GetAssetStatusSettings()
+{
+	return GetMutableDefault<UAssetStatusSettings>();
+}
+
+void UAssetStatusSettings::PostInitProperties()
 {
 	Super::PostInitProperties();
 

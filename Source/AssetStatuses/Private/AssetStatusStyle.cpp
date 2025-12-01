@@ -3,7 +3,7 @@
 
 #include "AssetStatusStyle.h"
 
-#include "AssetStatusIconSettings.h"
+#include "AssetStatusSettings.h"
 #include "Interfaces/IPluginManager.h"
 #include "Styling/SlateStyleRegistry.h"
 
@@ -36,7 +36,7 @@ const FAssetStatusEditorStyle& FAssetStatusEditorStyle::Get()
 
  
 
-void FAssetStatusEditorStyle::Initialize(UAssetStatusIconSettings* Settings)
+void FAssetStatusEditorStyle::Initialize(UAssetStatusSettings* Settings)
 {
 	FString ResourcePath = IPluginManager::Get().FindPlugin(UE_PLUGIN_NAME)->GetBaseDir() + "\\Resources\\Icons";
 	const FString MenuIconFile = ResourcePath + "\\AssetStatusMenuIcon.png";
@@ -74,8 +74,8 @@ void FAssetStatusEditorStyle::UpdateIconStyles(TArray<FAssetStatusEntry>& Entrie
 
 void FAssetStatusEditorStyle::OnAssetStatusSettingsChanged(UObject* InObject, FPropertyChangedEvent& PropertyChangedEvent)
 { 
-	UAssetStatusIconSettings* Settings = Cast<UAssetStatusIconSettings>(InObject);
-	if (PropertyChangedEvent.GetMemberPropertyName() == GET_MEMBER_NAME_CHECKED(UAssetStatusIconSettings, IconFolderPath))
+	UAssetStatusSettings* Settings = Cast<UAssetStatusSettings>(InObject);
+	if (PropertyChangedEvent.GetMemberPropertyName() == GET_MEMBER_NAME_CHECKED(UAssetStatusSettings, IconFolderPath))
 	{
 		UnRegister(); 
 		UpdateContentRoot(Settings->IconFolderPath.Path);

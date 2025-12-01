@@ -4,11 +4,11 @@
 #include "AssetStatusMenuExtension.h"
 
 #include "AssetSelection.h"
-#include "AssetStatusIconSettings.h"
+#include "AssetStatusSettings.h"
 #include "EditorAssetLibrary.h"
 
 #define LOCTEXT_NAMESPACE "AssetStatusMenuExtension"
-FAssetStatusMenuExtension::FAssetStatusMenuExtension(UAssetStatusIconSettings* Settings)
+FAssetStatusMenuExtension::FAssetStatusMenuExtension(UAssetStatusSettings* Settings)
 {
 	check(Settings);
 	AssetStatusSettings = Settings;

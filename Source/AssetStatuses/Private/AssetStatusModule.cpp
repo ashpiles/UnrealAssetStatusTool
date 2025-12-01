@@ -3,7 +3,7 @@
 #include "AssetStatusModule.h"
 
 #include "AssetStatusFilters.h"
-#include "AssetStatusIconSettings.h"
+#include "AssetStatusSettings.h"
 #include "AssetStatusMenuExtension.h"
 #include "AssetStatusStyle.h"
 #include "ContentBrowserModule.h"
@@ -28,7 +28,7 @@ void FAssetStatusModule::StartupModule()
 	TArray<FContentBrowserMenuExtender_SelectedAssets>& MenuExtenderDelegates = ContentBrowserModule.GetAllAssetViewContextMenuExtenders();
 	
 	// Get Developer Settings
-	Settings = TObjectPtr<UAssetStatusIconSettings>(GetMutableDefault<UAssetStatusIconSettings>());
+	Settings = TObjectPtr<UAssetStatusSettings>(GetMutableDefault<UAssetStatusSettings>());
  
 	// Add Style
 	FAssetStatusEditorStyle::Initialize(Settings.Get()); 
@@ -65,9 +65,12 @@ TSharedRef<SWidget> FAssetStatusModule::GenerateAssetTagIcons(const FAssetData& 
 	return SNew(SAssetTagIcon)
 		.AssetStatus_Lambda([ObjectPath = AssetData.GetSoftObjectPath()]() 
 		{
-			TMap<FName, FString> MetaData = UEditorAssetLibrary::GetMetadataTagValues(ObjectPath.ResolveObject());
-			if (MetaData.Contains("AssetStatus"))
-				return MetaData["AssetStatus"];
+			if (UObject* Object = ObjectPath.ResolveObject())
+			{
+				TMap<FName, FString> MetaData = UEditorAssetLibrary::GetMetadataTagValues(Object);
+				if (MetaData.Contains("AssetStatus"))
+					return MetaData["AssetStatus"]; 
+			}
 			return FString("None");
 		});
 }

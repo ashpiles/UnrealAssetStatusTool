@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "AssetStatusIconSettings.h"
+#include "AssetStatusSettings.h"
 #include "Modules/ModuleManager.h"
 
 
@@ -24,6 +24,6 @@ private:
 
 	TSharedPtr<FAssetStatusMenuExtension> AssetStatusMenuExtension;
 	TSharedPtr<FAssetStatusFilters> AssetStatusFilters;
-	TObjectPtr<UAssetStatusIconSettings> Settings;
+	TObjectPtr<UAssetStatusSettings> Settings;
 	
 };
